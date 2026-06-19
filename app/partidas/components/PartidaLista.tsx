@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, CheckCircle, Flame, Calendar, MapPin, Trophy } from "lucide-react";
+import { Clock, CheckCircle, Flame, Calendar, MapPin, Trophy, LayoutGrid } from "lucide-react";
 import type { Partida, Status, Filtro } from "@/types/partidas";
 
 type Props = {
@@ -16,7 +16,7 @@ const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: string; 
     icon: <Clock size={11} />,
   },
   em_andamento: {
-    label: "Em andamento",
+    label: "Ao Vivo",
     color: "#F59E0B",
     bg: "#FEF3C7",
     icon: <Flame size={11} />,
@@ -29,11 +29,11 @@ const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: string; 
   },
 };
 
-const FILTROS: { key: Filtro; label: string }[] = [
-  { key: "todas", label: "Todas" },
-  { key: "agendado", label: "Agendadas" },
-  { key: "em_andamento", label: "Em andamento" },
-  { key: "finalizada", label: "Finalizadas" },
+const FILTROS: { key: Filtro; label: string; icon: React.ReactNode }[] = [
+  { key: "todas",       label: "Todas",       icon: <LayoutGrid size={15} /> },
+  { key: "agendado",    label: "Agendadas",   icon: <Clock size={15} /> },
+  { key: "em_andamento", label: "Ao Vivo",    icon: <Flame size={15} /> },
+  { key: "finalizada",  label: "Finalizadas", icon: <CheckCircle size={15} /> },
 ];
 
 function formatarDataGrupo(data: string) {
@@ -65,18 +65,22 @@ export function PartidaLista({ partidas }: Props) {
   return (
     <div>
       {/* Filtros */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex sm:w-auto w-full gap-2 mb-6">
         {FILTROS.map((f) => (
           <button
             key={f.key}
             onClick={() => setFiltro(f.key)}
-            className={`text-[13px] font-medium px-4 py-1.5 rounded-full border transition-colors ${
+            title={f.label}
+            className={`flex-1 sm:flex-none flex items-center justify-center gap-2 text-[13px] font-medium px-4 py-1.5 rounded-full border transition-colors ${
               filtro === f.key
                 ? "bg-[#4F6BED] border-[#4F6BED] text-white"
                 : "bg-white border-[#E5E7EB] text-[#64748B] hover:border-[#4F6BED]"
             }`}
           >
-            {f.label}
+            {/* Ícone sempre visível */}
+            <span className="shrink-0">{f.icon}</span>
+            {/* Label some no mobile */}
+            <span className="hidden sm:inline">{f.label}</span>
           </button>
         ))}
       </div>

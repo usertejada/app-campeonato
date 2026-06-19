@@ -7,7 +7,7 @@ export function PartidaHeader() {
   const router = useRouter();
 
   return (
-    <div className="flex items-start justify-between mb-6">
+    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
       <div>
         <h1 className="text-[22px] font-bold text-[#1E293B]">Partidas</h1>
         <p className="text-[13px] text-[#94A3B8] mt-0.5">Gerencie e acompanhe todos os jogos</p>
