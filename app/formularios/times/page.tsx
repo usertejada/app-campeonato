@@ -128,7 +128,7 @@ export default function FormularioTimePage() {
 
       {/* Formulário centralizado */}
       <div className="w-full max-w-[700px] mx-auto">
-        <div className="bg-white rounded-[12px] border border-[#E5E7EB] shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+        <div className="bg-white rounded-[12px] border border-[#bdd6d2] shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
 
           {/* Header do card */}
           <div className="flex items-center gap-3 px-5 py-4 border-b border-[#F1F5F9]">

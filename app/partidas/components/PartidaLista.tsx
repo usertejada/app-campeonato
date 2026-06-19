@@ -83,7 +83,7 @@ export function PartidaLista({ partidas }: Props) {
 
       {/* Lista */}
       {filtradas.length === 0 ? (
-        <div className="bg-white border border-[#E5E7EB] rounded-[12px] p-10 flex flex-col items-center justify-center text-center">
+        <div className="bg-white border border-[#bdd6d2] rounded-[12px] p-10 flex flex-col items-center justify-center text-center">
           <Trophy size={32} className="text-[#CBD5E1] mb-3" />
           <p className="text-[14px] font-medium text-[#94A3B8]">Nenhuma partida encontrada</p>
           <p className="text-[12px] text-[#CBD5E1] mt-1">
@@ -98,7 +98,7 @@ export function PartidaLista({ partidas }: Props) {
               <div key={data}>
                 {/* Label da data */}
                 <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2 bg-white border border-[#E5E7EB] rounded-full px-3 py-1.5">
+                  <div className="flex items-center gap-2 bg-white border border-[#bdd6d2] rounded-full px-3 py-1.5">
                     <Calendar size={13} className="text-[#4F6BED]" />
                     <span className="text-[12px] font-semibold text-[#1E293B]">
                       {formatarDataGrupo(data)}
@@ -110,13 +110,13 @@ export function PartidaLista({ partidas }: Props) {
                 </div>
 
                 {/* Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {jogos.map((p) => {
                     const cfg = STATUS_CONFIG[p.status];
                     return (
                       <div
                         key={p.id}
-                        className="bg-white border border-[#E5E7EB] rounded-[12px] overflow-hidden"
+                        className="bg-white border border-[#bdd6d2] rounded-[12px] overflow-hidden"
                       >
                         {/* Topo */}
                         <div className="flex items-center justify-between px-4 py-2.5">

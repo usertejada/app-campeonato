@@ -35,7 +35,7 @@ export default function TimesPage() {
             placeholder="Buscar time..."
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
-            className="w-full h-[36px] pl-9 pr-3 rounded-[8px] border border-[#E5E7EB] bg-white text-[#1E293B] text-[13px] placeholder:text-[#94A3B8] outline-none focus:border-[#4F6BED] focus:ring-2 focus:ring-[rgba(79,107,237,0.2)] transition-all"
+            className="w-full h-[36px] pl-9 pr-3 rounded-[8px] border border-[#bdd6d2] bg-white text-[#1E293B] text-[13px] placeholder:text-[#94A3B8] outline-none focus:border-[#4F6BED] focus:ring-2 focus:ring-[rgba(79,107,237,0.2)] transition-all"
           />
         </div>
       </div>

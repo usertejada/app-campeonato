@@ -115,7 +115,7 @@ export function FichaJogadorContent() {
 
       <div className="max-w-[700px] mx-auto">
 
-        <div className="bg-white border border-[#E5E7EB] rounded-[12px] overflow-hidden">
+        <div className="bg-white border border-[#bdd6d2] rounded-[12px] overflow-hidden">
 
           <div className="h-[3px] bg-gradient-to-r from-[#6366F1] to-[#A78BFA]" />
 
@@ -212,7 +212,7 @@ export function FichaJogadorContent() {
         </div>
 
         {/* Estatísticas na Temporada */}
-        <div className="bg-white border border-[#E5E7EB] rounded-[12px] p-6 mt-5">
+        <div className="bg-white border border-[#bdd6d2] rounded-[12px] p-6 mt-5">
           <h2 className="text-[15px] font-extrabold text-[#1E293B] mb-4">Estatísticas na Temporada</h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -277,7 +277,7 @@ export function FichaJogadorContent() {
         </div>
 
         {/* Situação Disciplinar */}
-        <div className="bg-white border border-[#E5E7EB] rounded-[12px] p-6 mt-5">
+        <div className="bg-white border border-[#bdd6d2] rounded-[12px] p-6 mt-5">
           <h2 className="text-[15px] font-extrabold text-[#1E293B] mb-4">Situação Disciplinar</h2>
 
           <div className="flex items-center justify-between mb-2">

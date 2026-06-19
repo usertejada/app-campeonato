@@ -80,7 +80,7 @@ export default function NovaPartidaPage() {
       <div className="max-w-[740px] mx-auto pb-10 flex flex-col gap-4">
 
         {/* Informações do dia */}
-        <div className="bg-white border border-[#E5E7EB] rounded-[14px] px-6 py-5">
+        <div className="bg-white border border-[#bdd6d2] rounded-[14px] px-6 py-5">
           <div className="flex items-center gap-2 mb-4">
             <Calendar size={15} className="text-[#4F6BED]" />
             <p className="text-[14px] font-bold text-[#1E293B]">Informações do Dia</p>
@@ -148,7 +148,7 @@ export default function NovaPartidaPage() {
         </div>
 
         {/* Tempo de jogo */}
-        <div className="bg-white border border-[#E5E7EB] rounded-[14px] px-6 py-5">
+        <div className="bg-white border border-[#bdd6d2] rounded-[14px] px-6 py-5">
           <div className="flex items-center gap-2 mb-4">
             <Clock size={15} className="text-[#4F6BED]" />
             <p className="text-[14px] font-bold text-[#1E293B]">Tempo de Jogo</p>
@@ -200,7 +200,7 @@ export default function NovaPartidaPage() {
         </div>
 
         {/* Confrontos */}
-        <div className="bg-white border border-[#E5E7EB] rounded-[14px] px-6 py-5">
+        <div className="bg-white border border-[#bdd6d2] rounded-[14px] px-6 py-5">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Users size={15} className="text-[#4F6BED]" />

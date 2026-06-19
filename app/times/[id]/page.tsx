@@ -48,7 +48,7 @@ export default function TimeDetailPage() {
       <div className="max-w-[700px] mx-auto space-y-5">
 
         {/* Card do time */}
-        <div className="bg-white border border-[#E5E7EB] rounded-[12px] p-4 md:p-6">
+        <div className="bg-white border border-[#bdd6d2] rounded-[12px] p-4 md:p-6">
           <div className="flex items-start gap-4">
             {/* Logo */}
             <div className="w-[64px] h-[64px] md:w-[80px] md:h-[80px] rounded-[12px] border border-[#E5E7EB] bg-[#F8FAFC] flex items-center justify-center shrink-0 overflow-hidden">
@@ -103,7 +103,7 @@ export default function TimeDetailPage() {
             </button>
           </div>
 
-          <div className="bg-white border border-[#E5E7EB] rounded-[12px] overflow-hidden">
+          <div className="bg-white border border-[#bdd6d2] rounded-[12px] overflow-hidden">
             {/* Sub-header */}
             <div className="flex items-center justify-between px-4 py-3.5 border-b border-[#F1F5F9] md:px-5">
               <div className="flex items-center gap-2">

@@ -155,7 +155,7 @@ function CardJogo({ jogo }: { jogo: Jogo }) {
       : "#DC2626";
 
   return (
-    <div className="bg-white border border-[#E5E7EB] rounded-[12px] p-4 flex flex-col gap-3">
+    <div className="bg-white border border-[#bdd6d2] rounded-[12px] p-4 flex flex-col gap-3">
       {/* Topo */}
       <div className="flex items-center justify-between">
         <BadgeResultado resultado={jogo.resultado} />

@@ -147,7 +147,7 @@ export default function NovoCampeonatoPage() {
 
       {/* Formulário centralizado com largura máxima */}
       <div className="w-full max-w-[700px] mx-auto">
-        <div className="bg-white rounded-[12px] border border-[#E5E7EB] shadow-[0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden">
+        <div className="bg-white rounded-[12px] border border-[#bdd6d2] shadow-[0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden">
 
           {/* Header do card */}
           <div className="flex items-center gap-3 px-5 py-4 border-b border-[#F1F5F9]">
@@ -243,7 +243,7 @@ export default function NovoCampeonatoPage() {
                     value={form.nome}
                     onChange={handleChange}
                     placeholder="Ex: Copa Verão 2025"
-                    className={`${inputClass} pl-9 ${errors.nome ? inputErrorClass : ""}`}
+                    className={`${inputClass} pl-9 ${errors.nome ? inputErrorClass : ""} border border-[#bdd6d2]`}
                   />
                 </div>
                 {errors.nome && (

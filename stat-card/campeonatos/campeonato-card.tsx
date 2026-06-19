@@ -12,7 +12,7 @@ interface CampeonatoCardProps {
 
 export function CampeonatoCard({ campeonato, onEditar, onFinalizar, onExcluir }: CampeonatoCardProps) {
   return (
-    <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.10)] transition-all hover:-translate-y-[1px] cursor-pointer flex flex-col gap-3">
+    <div className="bg-white rounded-[12px] border border-[#bdd6d2] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.10)] transition-all hover:-translate-y-[1px] cursor-pointer flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <div className="w-10 h-10 rounded-full bg-[#EEF2FF] flex items-center justify-center shrink-0">
           <Trophy size={17} color="#4F6BED" />

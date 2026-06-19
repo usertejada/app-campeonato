@@ -60,7 +60,7 @@ export default function PartidaAleatoriaPage() {
       <div className="max-w-[740px] mx-auto pb-10 flex flex-col gap-4">
 
         {/* Título */}
-        <div className="bg-white border border-[#E5E7EB] rounded-[14px] px-6 py-5 flex items-center gap-4">
+        <div className="bg-white border border-[#bdd6d2] rounded-[14px] px-6 py-5 flex items-center gap-4">
           <div className="w-10 h-10 rounded-[10px] bg-[#EEF1FD] flex items-center justify-center">
             <Zap size={18} className="text-[#4F6BED]" />
           </div>
@@ -71,7 +71,7 @@ export default function PartidaAleatoriaPage() {
         </div>
 
         {/* Configurações */}
-        <div className="bg-white border border-[#E5E7EB] rounded-[14px] px-6 py-5 flex flex-col gap-5">
+        <div className="bg-white border border-[#bdd6d2] rounded-[14px] px-6 py-5 flex flex-col gap-5">
 
           {/* Campeonato */}
           <div>
@@ -212,7 +212,7 @@ export default function PartidaAleatoriaPage() {
         <div className="grid grid-cols-2 gap-3">
           <button
             onClick={() => router.push("/partidas")}
-            className="bg-white border border-[#E5E7EB] hover:bg-[#F8FAFC] text-[#1E293B] text-[14px] font-semibold py-3 rounded-[10px] transition-colors"
+            className="bg-white border border-[#bdd6d2] hover:bg-[#F8FAFC] text-[#1E293B] text-[14px] font-semibold py-3 rounded-[10px] transition-colors"
           >
             Cancelar
           </button>

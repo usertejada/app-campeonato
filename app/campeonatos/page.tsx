@@ -1,3 +1,5 @@
+// /app/campeonatos/page.tsx
+
 "use client";
 
 import { Trophy, Search, Filter } from "lucide-react";
