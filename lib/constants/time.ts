@@ -1,0 +1,48 @@
+import type { Time } from "@/types/time";
+
+export const timesMock: Time[] = [
+  {
+    id: 1,
+    nome: "Astro Rey FC",
+    cidade: "Tabatinga-AM",
+    tecnico: "Carlos Mendes",
+    campeonato: "Liga Tejada 2026",
+    anoFundacao: 2018,
+    vitorias: 0,
+    empates: 0,
+    derrotas: 0,
+  },
+  {
+    id: 2,
+    nome: "Amigos do Cabelinho",
+    cidade: "Tabatinga-AM",
+    tecnico: "Roberto Silva",
+    campeonato: "Copa Verão 2025",
+    anoFundacao: 2015,
+    vitorias: 5,
+    empates: 2,
+    derrotas: 1,
+  },
+  {
+    id: 3,
+    nome: "Águias SC",
+    cidade: "Benjamin Constant-AM",
+    tecnico: "Paulo Rocha",
+    campeonato: "Copa Verão 2025",
+    anoFundacao: 2020,
+    vitorias: 3,
+    empates: 1,
+    derrotas: 3,
+  },
+  {
+    id: 4,
+    nome: "Trovões EC",
+    cidade: "Atalaia do Norte-AM",
+    tecnico: "Marcos Lima",
+    campeonato: "Liga Empresarial",
+    anoFundacao: 2012,
+    vitorias: 8,
+    empates: 0,
+    derrotas: 2,
+  },
+];
