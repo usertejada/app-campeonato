@@ -194,6 +194,39 @@ export default function ArtilheiroPage() {
         </div>
       </div>
 
+      {/* ===== PAGINAÇÃO (acima dos cards, alinhada à direita) ===== */}
+      {totalPaginas > 1 && (
+        <div className="flex items-center justify-end gap-2 mb-4 md:mb-5">
+          <button
+            onClick={() => setPagina((p) => Math.max(1, p - 1))}
+            disabled={pagina === 1}
+            className="w-8 h-8 flex items-center justify-center rounded-[8px] border border-[#E5E7EB] bg-white text-[#94A3B8] disabled:opacity-50 hover:bg-[#FAFAFA] transition-colors"
+          >
+            <ChevronLeft size={14} />
+          </button>
+
+          {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((p) => (
+            <button
+              key={p}
+              onClick={() => setPagina(p)}
+              className={`w-8 h-8 flex items-center justify-center rounded-[8px] text-[13px] font-medium transition-colors ${
+                p === pagina ? "bg-[#4F6BED] text-white" : "bg-white border border-[#E5E7EB] text-[#1E293B] hover:bg-[#FAFAFA]"
+              }`}
+            >
+              {p}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setPagina((p) => Math.min(totalPaginas, p + 1))}
+            disabled={pagina === totalPaginas}
+            className="w-8 h-8 flex items-center justify-center rounded-[8px] border border-[#E5E7EB] bg-white text-[#94A3B8] disabled:opacity-50 hover:bg-[#FAFAFA] transition-colors"
+          >
+            <ChevronRight size={14} />
+          </button>
+        </div>
+      )}
+
       {/* ===== PÓDIO ===== */}
 
       {/* Mobile: pódio em coluna (1°, 2°, 3°) */}
@@ -316,14 +349,14 @@ export default function ArtilheiroPage() {
       {/* ===== LISTA ===== */}
 
       {/* Mobile: sanfona (accordion) */}
-      <div className="sm:hidden bg-white rounded-[12px] border border-[#bdd6d2] overflow-hidden mb-5">
+      <div className="sm:hidden bg-white rounded-[12px] border border-[#bdd6d2] overflow-hidden">
         {lista.map((a) => (
           <AccordionRow key={a.posicao} a={a} maxGols={maxGols} />
         ))}
       </div>
 
       {/* Tablet: tabela simplificada sem coluna de progresso */}
-      <div className="hidden sm:block md:hidden bg-white rounded-[12px] border border-[#bdd6d2] overflow-hidden mb-5">
+      <div className="hidden sm:block md:hidden bg-white rounded-[12px] border border-[#bdd6d2] overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-[#E5E7EB]">
@@ -371,7 +404,7 @@ export default function ArtilheiroPage() {
       </div>
 
       {/* Desktop: tabela completa */}
-      <div className="hidden md:block bg-white rounded-[12px] border border-[#bdd6d2] overflow-hidden mb-5">
+      <div className="hidden md:block bg-white rounded-[12px] border border-[#bdd6d2] overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-[#E5E7EB]">
@@ -429,36 +462,6 @@ export default function ArtilheiroPage() {
         </table>
       </div>
 
-      {/* Paginação */}
-      <div className="flex items-center justify-center gap-2 mt-5">
-        <button
-          onClick={() => setPagina((p) => Math.max(1, p - 1))}
-          disabled={pagina === 1}
-          className="w-8 h-8 flex items-center justify-center rounded-[8px] border border-[#E5E7EB] bg-white text-[#94A3B8] disabled:opacity-50 hover:bg-[#FAFAFA] transition-colors"
-        >
-          <ChevronLeft size={14} />
-        </button>
-
-        {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((p) => (
-          <button
-            key={p}
-            onClick={() => setPagina(p)}
-            className={`w-8 h-8 flex items-center justify-center rounded-[8px] text-[13px] font-medium transition-colors ${
-              p === pagina ? "bg-[#4F6BED] text-white" : "bg-white border border-[#E5E7EB] text-[#1E293B] hover:bg-[#FAFAFA]"
-            }`}
-          >
-            {p}
-          </button>
-        ))}
-
-        <button
-          onClick={() => setPagina((p) => Math.min(totalPaginas, p + 1))}
-          disabled={pagina === totalPaginas}
-          className="w-8 h-8 flex items-center justify-center rounded-[8px] border border-[#E5E7EB] bg-white text-[#94A3B8] disabled:opacity-50 hover:bg-[#FAFAFA] transition-colors"
-        >
-          <ChevronRight size={14} />
-        </button>
-      </div>
     </div>
   );
 }
