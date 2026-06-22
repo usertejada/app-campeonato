@@ -5,6 +5,8 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Trophy, ArrowLeft, Calendar, Users, FileText, Tag, MapPin, Upload, X, ImagePlus } from "lucide-react";
 import { PageHeader } from "@/components/shared/page-header";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 
 type Formato = "Mata-mata" | "Pontos corridos" | "Eliminatório" | "Grupos + mata-mata";
 type Status = "Em Andamento" | "Pendente" | "Finalizado";
@@ -24,38 +26,6 @@ interface CampeonatoForm {
 const FORMATOS: Formato[] = ["Mata-mata", "Pontos corridos", "Eliminatório", "Grupos + mata-mata"];
 const STATUS_OPTIONS: Status[] = ["Pendente", "Em Andamento", "Finalizado"];
 
-// ── Campo reutilizável ──────────────────────────────────────────────────
-function Field({
-  label,
-  required,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label className="text-[#1E293B] text-[13px] font-medium">
-        {label}
-        {required && <span className="text-red-500 ml-0.5">*</span>}
-      </label>
-      {children}
-    </div>
-  );
-}
-
-// ── Estilos base ────────────────────────────────────────────────────────
-const inputClass =
-  "w-full h-[38px] px-3 rounded-[8px] border border-[#D1D5DB] bg-white text-[#1E293B] text-[13px] placeholder:text-[#94A3B8] outline-none focus:border-[#4F6BED] focus:ring-2 focus:ring-[rgba(79,107,237,0.2)] transition-all";
-
-const inputErrorClass =
-  "border-red-400 focus:border-red-400 focus:ring-red-100";
-
-const selectClass =
-  "w-full h-[38px] px-3 rounded-[8px] border border-[#D1D5DB] bg-white text-[#1E293B] text-[13px] outline-none focus:border-[#4F6BED] focus:ring-2 focus:ring-[rgba(79,107,237,0.2)] transition-all cursor-pointer";
-
-// ── Página ──────────────────────────────────────────────────────────────
 export default function NovoCampeonatoPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -169,7 +139,10 @@ export default function NovoCampeonatoPage() {
 
             {/* Logotipo */}
             <div className="md:col-span-2">
-              <Field label="Logotipo do Campeonato">
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[#1E293B] text-[13px] font-medium">
+                  Logotipo do Campeonato
+                </label>
 
                 {/* Área de drop */}
                 <div
@@ -185,14 +158,12 @@ export default function NovoCampeonatoPage() {
                   ].join(" ")}
                 >
                   {preview ? (
-                    /* Preview da imagem */
                     <>
                       <img
                         src={preview}
                         alt="Logotipo"
                         className="h-full w-full object-contain p-3"
                       />
-                      {/* Botão remover em cima da imagem */}
                       <button
                         type="button"
                         onClick={(e) => { e.stopPropagation(); handleRemoveFile(); }}
@@ -202,7 +173,6 @@ export default function NovoCampeonatoPage() {
                       </button>
                     </>
                   ) : (
-                    /* Placeholder */
                     <div className="flex flex-col items-center gap-2 pointer-events-none">
                       <div className="w-10 h-10 rounded-full bg-[#EEF2FF] flex items-center justify-center">
                         <ImagePlus size={18} color="#4F6BED" />
@@ -230,31 +200,27 @@ export default function NovoCampeonatoPage() {
                   onChange={handleFileChange}
                   className="hidden"
                 />
-              </Field>
+              </div>
             </div>
 
             {/* Nome */}
             <div className="md:col-span-2">
-              <Field label="Nome do Campeonato" required>
-                <div className="relative">
-                  <Tag size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    name="nome"
-                    value={form.nome}
-                    onChange={handleChange}
-                    placeholder="Ex: Copa Verão 2025"
-                    className={`${inputClass} pl-9 ${errors.nome ? inputErrorClass : ""} border border-[#bdd6d2]`}
-                  />
-                </div>
-                {errors.nome && (
-                  <p className="text-red-500 text-[11px] mt-1">{errors.nome}</p>
-                )}
-              </Field>
+              <Input
+                name="nome"
+                label="Nome do Campeonato *"
+                value={form.nome}
+                onChange={handleChange}
+                placeholder="Ex: Copa Verão 2025"
+                error={errors.nome}
+                leftIcon={<Tag size={14} />}
+                className="border-[#bdd6d2]"
+              />
             </div>
 
-            {/* Descrição */}
+            {/* Descrição — textarea permanece manual, Input não suporta */}
             <div className="md:col-span-2">
-              <Field label="Descrição">
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[#1E293B] text-[13px] font-medium">Descrição</label>
                 <div className="relative">
                   <FileText size={14} color="#94A3B8" className="absolute left-3 top-3 pointer-events-none" />
                   <textarea
@@ -266,102 +232,74 @@ export default function NovoCampeonatoPage() {
                     className="w-full px-3 pl-9 py-2.5 rounded-[8px] border border-[#D1D5DB] bg-white text-[#1E293B] text-[13px] placeholder:text-[#94A3B8] outline-none focus:border-[#4F6BED] focus:ring-2 focus:ring-[rgba(79,107,237,0.2)] transition-all resize-none"
                   />
                 </div>
-              </Field>
+              </div>
             </div>
 
             {/* Local */}
             <div className="md:col-span-2">
-              <Field label="Local do Jogo">
-                <div className="relative">
-                  <MapPin size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    name="local"
-                    value={form.local}
-                    onChange={handleChange}
-                    placeholder="Ex: Estádio Municipal, São Paulo - SP"
-                    className={`${inputClass} pl-9`}
-                  />
-                </div>
-              </Field>
+              <Input
+                name="local"
+                label="Local do Jogo"
+                value={form.local}
+                onChange={handleChange}
+                placeholder="Ex: Estádio Municipal, São Paulo - SP"
+                leftIcon={<MapPin size={14} />}
+              />
             </div>
 
             {/* Formato */}
-            <Field label="Formato">
-              <select
-                name="formato"
-                value={form.formato}
-                onChange={handleChange}
-                className={selectClass}
-              >
-                {FORMATOS.map((f) => (
-                  <option key={f} value={f}>{f}</option>
-                ))}
-              </select>
-            </Field>
+            <Select
+              name="formato"
+              label="Formato"
+              value={form.formato}
+              onChange={handleChange}
+              options={FORMATOS.map((f) => ({ value: f, label: f }))}
+            />
 
             {/* Status */}
-            <Field label="Status">
-              <select
-                name="status"
-                value={form.status}
-                onChange={handleChange}
-                className={selectClass}
-              >
-                {STATUS_OPTIONS.map((s) => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-            </Field>
+            <Select
+              name="status"
+              label="Status"
+              value={form.status}
+              onChange={handleChange}
+              options={STATUS_OPTIONS.map((s) => ({ value: s, label: s }))}
+            />
 
             {/* Data início */}
-            <Field label="Data de Início" required>
-              <div className="relative">
-                <Calendar size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="date"
-                  name="dataInicio"
-                  value={form.dataInicio}
-                  onChange={handleChange}
-                  className={`${inputClass} pl-9 ${errors.dataInicio ? inputErrorClass : ""}`}
-                />
-              </div>
-              {errors.dataInicio && (
-                <p className="text-red-500 text-[11px] mt-1">{errors.dataInicio}</p>
-              )}
-            </Field>
+            <Input
+              type="date"
+              name="dataInicio"
+              label="Data de Início *"
+              value={form.dataInicio}
+              onChange={handleChange}
+              error={errors.dataInicio}
+              leftIcon={<Calendar size={14} />}
+            />
 
             {/* Data fim */}
-            <Field label="Data de Término">
-              <div className="relative">
-                <Calendar size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="date"
-                  name="dataFim"
-                  value={form.dataFim}
-                  onChange={handleChange}
-                  className={`${inputClass} pl-9`}
-                />
-              </div>
-            </Field>
+            <Input
+              type="date"
+              name="dataFim"
+              label="Data de Término"
+              value={form.dataFim}
+              onChange={handleChange}
+              leftIcon={<Calendar size={14} />}
+            />
 
             {/* Quantidade de times */}
-            <Field label="Quantidade de Times" required>
-              <div className="relative">
-                <Users size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="number"
-                  name="quantidadeTimes"
-                  value={form.quantidadeTimes}
-                  onChange={handleChange}
-                  placeholder="Ex: 16"
-                  min={2}
-                  className={`${inputClass} pl-9 ${errors.quantidadeTimes ? inputErrorClass : ""}`}
-                />
-              </div>
-              {errors.quantidadeTimes && (
-                <p className="text-red-500 text-[11px] mt-1">{errors.quantidadeTimes}</p>
-              )}
-            </Field>
+            <div className="md:col-span-2">
+              <Input
+                type="number"
+                name="quantidadeTimes"
+                label="Quantidade de Times *"
+                value={form.quantidadeTimes}
+                onChange={handleChange}
+                placeholder="Ex: 16"
+                min={2}
+                error={errors.quantidadeTimes}
+                leftIcon={<Users size={14} />}
+              />
+            </div>
 
           </div>
 

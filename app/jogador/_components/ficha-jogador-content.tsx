@@ -1,3 +1,4 @@
+// app/jogador/_components/ficha-jogador-content.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -120,6 +121,11 @@ export function FichaJogadorContent() {
           <div className="h-[3px] bg-gradient-to-r from-[#6366F1] to-[#A78BFA]" />
 
           <div className="p-6">
+            {/* Nome — aparece acima no mobile, escondido aqui no desktop */}
+            <h1 className="md:hidden text-[19px] font-extrabold text-[#1E293B] leading-tight mb-3 truncate">
+              {jogador.nome}
+            </h1>
+
             <div className="flex items-start gap-3">
 
               {/* Foto */}
@@ -133,7 +139,10 @@ export function FichaJogadorContent() {
 
               {/* Info */}
               <div className="flex-1 min-w-0">
-                <h1 className="text-[19px] font-extrabold text-[#1E293B] leading-tight truncate">{jogador.nome}</h1>
+                {/* Nome — escondido no mobile (já aparece acima), visível no desktop */}
+                <h1 className="hidden md:block text-[19px] font-extrabold text-[#1E293B] leading-tight truncate">
+                  {jogador.nome}
+                </h1>
 
                 <div className="flex items-center gap-1.5 mt-1 text-[13px] font-semibold text-[#4F6BED] flex-wrap">
                   {codigoPais && (
@@ -187,18 +196,10 @@ export function FichaJogadorContent() {
             <button
                 title="Editar"
                 onClick={() => router.push(`/formularios/jogador?jogadorId=${jogador.id}&timeId=${timeId}`)}
-                className="flex items-center justify-center gap-1.5 text-[13px] font-semibold text-[#10B981] border border-[#10B981]/30 rounded-[8px] px-2.5 py-2 min-[480px]:px-3.5 hover:bg-[#10B981]/5 transition-colors"
+                className="flex items-center justify-center gap-1.5 text-[13px] font-semibold text-[#10B981] border border-[#10B981]/30 rounded-[8px] px-3.5 py-2 hover:bg-[#10B981]/5 transition-colors"
             >
                 <Pencil size={14} />
-                <span className="hidden min-[480px]:inline">Editar</span>
-            </button>
-
-            <button
-                title="Transferir"
-                className="flex items-center justify-center gap-1.5 text-[13px] font-semibold text-[#4F6BED] border border-[#4F6BED]/30 rounded-[8px] px-2.5 py-2 min-[480px]:px-3.5 hover:bg-[#4F6BED]/5 transition-colors"
-            >
-                <ArrowRightLeft size={14} />
-                <span className="hidden min-[480px]:inline">Transferir</span>
+                <span>Editar</span>
             </button>
 
             <button
@@ -206,7 +207,7 @@ export function FichaJogadorContent() {
                 className="flex items-center justify-center gap-1.5 text-[13px] font-semibold text-[#EF4444] border border-[#EF4444]/30 rounded-[8px] px-2.5 py-2 min-[480px]:px-3.5 hover:bg-[#EF4444]/5 transition-colors ml-auto"
             >
                 <Trash2 size={14} />
-                <span className="hidden min-[480px]:inline">Excluir</span>
+                <span>Excluir</span>
             </button>
             </div>
         </div>

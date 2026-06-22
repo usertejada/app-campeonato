@@ -1,3 +1,4 @@
+// types/time.ts
 export interface Time {
   id: number;
   nome: string;
@@ -6,6 +7,7 @@ export interface Time {
   tecnico: string;
   campeonato: string;
   anoFundacao: number;
+  telefone?: string;
   vitorias: number;
   empates: number;
   derrotas: number;

@@ -4,7 +4,7 @@ export const jogadoresMock: Jogador[] = [
   {
     id: 1,
     timeId: 1,
-    nome: "Anderson Tejada Macedo",
+    nome: "Anderson Tejada Macedo Macedo",
     posicao: "Atacante",
     numeroCamisa: 10,
     foto: undefined,

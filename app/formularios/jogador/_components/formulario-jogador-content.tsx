@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, User, ImagePlus, Upload, X, Shield, Hash, Calendar } from "lucide-react";
 import { PageHeader } from "@/components/shared/page-header";
+import { PhoneInput } from "@/components/shared/phone-input";
 
 const POSICOES = [
   { value: "Goleiro", label: "Goleiro" },
@@ -14,11 +15,19 @@ const POSICOES = [
   { value: "Atacante", label: "Atacante" },
 ];
 
+const NACIONALIDADES = [
+  { value: "Brasileiro", label: "Brasileiro", flag: "🇧🇷" },
+  { value: "Peruano", label: "Peruano", flag: "🇵🇪" },
+  { value: "Colombiano", label: "Colombiano", flag: "🇨🇴" },
+];
+
 interface FormState {
   nome: string;
+  nacionalidade: string;
   posicao: string;
   numeroCamisa: string;
   dataNascimento: string;
+  telefone: string;
   gols: string;
   assistencias: string;
   cartoesAmarelos: string;
@@ -27,9 +36,11 @@ interface FormState {
 
 const INITIAL: FormState = {
   nome: "",
+  nacionalidade: "",
   posicao: "",
   numeroCamisa: "",
   dataNascimento: "",
+  telefone: "",
   gols: "0",
   assistencias: "0",
   cartoesAmarelos: "0",
@@ -96,9 +107,10 @@ export function FormularioJogadorContent() {
 
   function validate() {
     const e: Partial<FormState> = {};
-    if (!form.nome.trim())        e.nome          = "Nome obrigatório.";
-    if (!form.posicao)            e.posicao       = "Selecione uma posição.";
-    if (!form.numeroCamisa)       e.numeroCamisa  = "Número obrigatório.";
+    if (!form.nome.trim())        e.nome           = "Nome obrigatório.";
+    if (!form.nacionalidade)      e.nacionalidade  = "Selecione uma nacionalidade.";
+    if (!form.posicao)            e.posicao        = "Selecione uma posição.";
+    if (!form.numeroCamisa)       e.numeroCamisa   = "Número obrigatório.";
     if (!form.dataNascimento)     e.dataNascimento = "Data obrigatória.";
     return e;
   }
@@ -109,6 +121,8 @@ export function FormularioJogadorContent() {
     console.log("Novo jogador:", { ...form, preview, timeId });
     router.push(`/times/${timeId}`);
   }
+
+  const selectedFlag = NACIONALIDADES.find((n) => n.value === form.nacionalidade)?.flag;
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-[#F1F3F7] px-4 py-4 md:px-5 md:py-5 lg:px-6 lg:py-6">
@@ -189,21 +203,65 @@ export function FormularioJogadorContent() {
             </div>
 
             {/* Nome */}
-            <div className="md:col-span-2">
-              <Field label="Nome do Jogador" required>
-                <div className="relative">
-                  <User size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    name="nome"
-                    value={form.nome}
-                    onChange={handleChange}
-                    placeholder="Ex: Lucas Andrade"
-                    className={`${inputClass} pl-9 ${errors.nome ? inputErrorClass : ""}`}
-                  />
-                </div>
-                {errors.nome && <p className="text-red-500 text-[11px] mt-1">{errors.nome}</p>}
-              </Field>
-            </div>
+            <Field label="Nome do Jogador" required>
+              <div className="relative">
+                <User size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  name="nome"
+                  value={form.nome}
+                  onChange={handleChange}
+                  placeholder="Ex: Lucas Andrade"
+                  className={`${inputClass} pl-9 ${errors.nome ? inputErrorClass : ""}`}
+                />
+              </div>
+              {errors.nome && <p className="text-red-500 text-[11px] mt-1">{errors.nome}</p>}
+            </Field>
+
+            {/* Nacionalidade */}
+            <Field label="Nacionalidade" required>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[15px] leading-none z-10">
+                  {selectedFlag ?? "🌐"}
+                </span>
+                <select
+                  name="nacionalidade"
+                  value={form.nacionalidade}
+                  onChange={handleChange}
+                  className={`${selectClass} pl-9 ${errors.nacionalidade ? inputErrorClass : ""}`}
+                >
+                  <option value="" disabled>Selecione...</option>
+                  {NACIONALIDADES.map((n) => (
+                    <option key={n.value} value={n.value}>
+                      {n.flag} {n.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {errors.nacionalidade && <p className="text-red-500 text-[11px] mt-1">{errors.nacionalidade}</p>}
+            </Field>
+
+            {/* Data de nascimento */}
+            <Field label="Data de Nascimento" required>
+              <div className="relative">
+                <Calendar size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  name="dataNascimento"
+                  type="date"
+                  value={form.dataNascimento}
+                  onChange={handleChange}
+                  className={`${inputClass} pl-9 ${errors.dataNascimento ? inputErrorClass : ""}`}
+                />
+              </div>
+              {errors.dataNascimento && <p className="text-red-500 text-[11px] mt-1">{errors.dataNascimento}</p>}
+            </Field>
+
+            {/* Telefone */}
+            <PhoneInput
+              label="Telefone"
+              value={form.telefone}
+              onChange={(v) => { setForm((p) => ({ ...p, telefone: v })); setErrors((p) => ({ ...p, telefone: "" })); }}
+              error={errors.telefone}
+            />
 
             {/* Posição */}
             <Field label="Posição" required>
@@ -241,47 +299,6 @@ export function FormularioJogadorContent() {
               </div>
               {errors.numeroCamisa && <p className="text-red-500 text-[11px] mt-1">{errors.numeroCamisa}</p>}
             </Field>
-
-            {/* Data de nascimento */}
-            <div className="md:col-span-2">
-              <Field label="Data de Nascimento" required>
-                <div className="relative">
-                  <Calendar size={14} color="#94A3B8" className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <input
-                    name="dataNascimento"
-                    type="date"
-                    value={form.dataNascimento}
-                    onChange={handleChange}
-                    className={`${inputClass} pl-9 ${errors.dataNascimento ? inputErrorClass : ""}`}
-                  />
-                </div>
-                {errors.dataNascimento && <p className="text-red-500 text-[11px] mt-1">{errors.dataNascimento}</p>}
-              </Field>
-            </div>
-
-            {/* Separador estatísticas */}
-            <div className="md:col-span-2 border-t border-[#F1F5F9] pt-4">
-              <p className="text-[13px] font-semibold text-[#1E293B] mb-4">Estatísticas</p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { name: "gols", label: "Gols" },
-                  { name: "assistencias", label: "Assistências" },
-                  { name: "cartoesAmarelos", label: "Cartões Amarelos" },
-                  { name: "cartoesVermelhos", label: "Cartões Vermelhos" },
-                ].map(({ name, label }) => (
-                  <Field key={name} label={label}>
-                    <input
-                      name={name}
-                      type="number"
-                      min={0}
-                      value={form[name as keyof FormState]}
-                      onChange={handleChange}
-                      className={inputClass}
-                    />
-                  </Field>
-                ))}
-              </div>
-            </div>
 
           </div>
 
